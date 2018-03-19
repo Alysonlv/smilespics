@@ -1,0 +1,1 @@
+This project was created following Caelum trainning about Angular.

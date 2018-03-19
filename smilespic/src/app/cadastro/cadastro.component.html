@@ -1,0 +1,56 @@
+<alv-tmplt-base [tmpltitulo]="valor">
+
+        <div *ngIf="msgProvider" class="row">
+            <div class="col-md-12">
+                <alv-mensagem [texto]="msgProvider.texto" [tipo]="msgProvider.tipo"></alv-mensagem>
+            </div>  
+        </div>
+    
+
+    <div class="row">
+        <form [formGroup]="formCadastro" class="col-md-7" (ngSubmit)="salvar()">
+            <div class="form-group">
+                <label for="">Titulo</label>
+                
+                <input 
+                formControlName="titulo" 
+                name="titulo" 
+                [(ngModel)]="foto.titulo"
+                type="text" class="form-control">
+                <div *ngIf="formCadastro.controls.titulo.errors">
+                        <alv-mensagem *ngIf="formCadastro.controls.titulo.required && formCadastro.controls.titulo.touched" texto="Título é obrigatório" tipo="danger"></alv-mensagem>
+                        <alv-mensagem *ngIf="formCadastro.controls.titulo.touched 
+                                        && formCadastro.controls.titulo.errors.minlength" 
+                                        texto="Digite pelo menos 
+                                        {{formCadastro.controls.titulo.errors.minlength.requiredLength}}
+                                        caracteres" tipo="danger"></alv-mensagem>
+                </div>
+                
+            </div>
+    
+            <div class="form-group">
+                <label for="">URL</label>
+                <input 
+                formControlName="url" 
+                [(ngModel)]="foto.url"
+                name="url" type="text" class="form-control">
+                <alv-mensagem *ngIf="formCadastro.controls.url.invalid && formCadastro.controls.url.touched" texto="URL é obrigatória" tipo="danger"></alv-mensagem>
+            </div>
+    
+            
+            <div class="form-group">
+                <label for="">Descricao</label>
+                <textarea formControlName="descricao" [(ngModel)]="foto.descricao" name="descricao" class="form-control"></textarea>  
+            </div>
+            
+            <a routerLink="/" class="btn btn-secondary">Voltar</a>  
+            <button [disabled]="" class="btn btn-primary">Salvar</button>
+                
+        </form>
+
+        <aside class="col-md-5">
+                <photo url="{{foto.url}}" titulo="{{foto.titulo}}"></photo>
+        </aside>
+    </div>
+
+</alv-tmplt-base>

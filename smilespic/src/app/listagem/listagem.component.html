@@ -1,0 +1,31 @@
+  <alv-tmplt-base [tmpltitulo]="tmpltitulo">
+
+{{msgServico}}
+
+  <div class="row mb-4">
+      <div class="col-sm-12">
+        <form action="" class="input-group">
+          <span class="input-group-prepend">
+            <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+          </span>
+          <input #inputFilter (input)="true" type="text" class="form-control">
+        </form>
+      </div>
+  </div>
+
+  <div class="row" *ngIf="mensagem">
+    <div class="col-sm-12">
+        <p class="alert alert-success" role="alert">{{mensagem}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+      <painel *ngFor="let photo of photos | filterByTitle:inputFilter.value" titulo="{{photo.titulo}}" class="col-md-2">
+          <a [routerLink]="['/cadastro', photo._id]"><photo url="{{photo.url}}" titulo="{{photo.titulo}}"></photo></a>
+          <alv-botao (acao)="apagar(photo)" estilo="danger" confirmacao="true">Apagar Foto</alv-botao>
+      </painel>
+  </div>
+  
+
+  <!-- <a routerLink ="/cadastro">Nova Foto</a> -->
+</alv-tmplt-base>
